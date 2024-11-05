@@ -4,13 +4,14 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import fs from "fs";
 
+// Load trips data from a JSON file
 const currentPath = fileURLToPath(import.meta.url);
 const tripsFile = fs.readFileSync(
   path.join(dirname(currentPath), "../config/data/data.json")
 );
 const tripsData = JSON.parse(tripsFile);
 
-//create the Trips table
+// Function to create the 'trips' table
 const createTripsTable = async () => {
   const createTripsTableQuery = `
         CREATE TABLE IF NOT EXISTS trips (
@@ -32,25 +33,25 @@ const createTripsTable = async () => {
   }
 };
 
-//check if trips table is empty since we'll be adding data to it soon
+// Function to check if the 'trips' table is empty
 const isTripsTableEmpty = async () => {
   const query = "SELECT COUNT(*) FROM trips";
   try {
     const res = await pool.query(query);
-    return res.rows[0].count === "0"; // returns true if the table is empty
+    return res.rows[0].count === "0"; // Returns true if the table is empty
   } catch (err) {
     console.error("⚠️ error checking trips table", err);
     return false;
   }
 };
 
-//adding data to the trips table NOTICE: trips table is also being created here
+// Function to seed the 'trips' table with initial data if it's empty
 const seedTripsTable = async () => {
-  await createTripsTable();
+  await createTripsTable(); // Ensure table is created before seeding
   const isEmpty = await isTripsTableEmpty();
 
-  //only add this new/starter data to the table if it has no data in it
   if (isEmpty) {
+    // Insert each trip from the JSON data
     tripsData.forEach((trip) => {
       const insertQuery = {
         text: "INSERT INTO trips (title, description, img_url, num_days, start_date, end_date, total_cost) VALUES ($1, $2, $3, $4, $5, $6, $7)",
@@ -79,7 +80,7 @@ const seedTripsTable = async () => {
   }
 };
 
-//create the Destinations table
+// Function to create the 'destinations' table
 const createDestinationsTable = async () => {
   const createDestinationsTableQuery = `
         CREATE TABLE IF NOT EXISTS destinations (
@@ -100,7 +101,7 @@ const createDestinationsTable = async () => {
   }
 };
 
-//create the Activities table
+// Function to create the 'activities' table with a foreign key reference to 'trips'
 const createActivitiesTable = async () => {
   const createActivitiesTableQuery = `
         CREATE TABLE IF NOT EXISTS activities (
@@ -119,7 +120,7 @@ const createActivitiesTable = async () => {
   }
 };
 
-//create the Trips Destinations table
+// Function to create the 'trips_destinations' join table with foreign keys to 'trips' and 'destinations'
 const createTripsDestinationsTable = async () => {
   const createTripsDestinationsTableQuery = `
         CREATE TABLE IF NOT EXISTS trips_destinations (
@@ -138,7 +139,7 @@ const createTripsDestinationsTable = async () => {
   }
 };
 
-//create the Users table
+// Function to create the 'users' table to store user data
 const createUsersTable = async () => {
   const createUsersTableQuery = `
         CREATE TABLE IF NOT EXISTS users (
@@ -150,14 +151,14 @@ const createUsersTable = async () => {
         );
     `;
   try {
-    const res = await pool.query(createUsersTableQuery);
+    await pool.query(createUsersTableQuery);
     console.log("🎉 users table created successfully");
   } catch (error) {
-    console.error("⚠️ error creating users table", err);
+    console.error("⚠️ error creating users table", error);
   }
 };
 
-//create the Trips Users table
+// Function to create the 'trips_users' join table with foreign keys to 'trips' and 'users'
 const createTripsUsersTable = async () => {
   const createTripsUsersTableQuery = `
         CREATE TABLE IF NOT EXISTS trips_users (
@@ -169,21 +170,22 @@ const createTripsUsersTable = async () => {
         );
     `;
   try {
-    const res = await pool.query(createTripsUsersTableQuery);
+    await pool.query(createTripsUsersTableQuery);
     console.log("🎉 trips_users table created successfully");
   } catch (error) {
-    console.error("⚠️ error creating trips_users table", err);
+    console.error("⚠️ error creating trips_users table", error);
   }
 };
 
-//setup the database using awaits as we'll go in the correct order here
+// Main setup function to create tables and seed data in the correct order
 const setupDatabase = async () => {
-  await seedTripsTable();
-  await createDestinationsTable();
-  await createActivitiesTable();
-  await createTripsDestinationsTable();
-  await createUsersTable();
-  await createTripsUsersTable();
+  await seedTripsTable(); // Create and seed 'trips' table
+  await createDestinationsTable(); // Create 'destinations' table
+  await createActivitiesTable(); // Create 'activities' table
+  await createTripsDestinationsTable(); // Create 'trips_destinations' join table
+  await createUsersTable(); // Create 'users' table
+  await createTripsUsersTable(); // Create 'trips_users' join table
 };
 
+// Run the setup function
 setupDatabase();

@@ -1,7 +1,7 @@
 import pg from 'pg'
 import './dotenv.js'
 
-//the configuration variables from .env
+//the configuration variables from .env (we acquired these through our ./dotenv.js file)
 const config = {
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
