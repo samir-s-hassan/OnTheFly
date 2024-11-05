@@ -111,7 +111,10 @@ const deleteTrip = async (req, res) => {
     await pool.query("DELETE FROM activities WHERE trip_id = $1", [id]);
 
     // Delete the trip from the 'trips' table
-    const results = await pool.query("DELETE FROM trips WHERE id = $1 RETURNING *", [id]);
+    const results = await pool.query(
+      "DELETE FROM trips WHERE id = $1 RETURNING *",
+      [id]
+    );
 
     // Respond with the deleted trip details
     res.status(200).json(results.rows[0]);
