@@ -10,6 +10,7 @@ const tripsFile = fs.readFileSync(
 );
 const tripsData = JSON.parse(tripsFile);
 
+//create the Trips table
 const createTripsTable = async () => {
   const createTripsTableQuery = `
         CREATE TABLE IF NOT EXISTS trips (
@@ -31,6 +32,7 @@ const createTripsTable = async () => {
   }
 };
 
+//check if trips table is empty since we'll be adding data to it soon
 const isTripsTableEmpty = async () => {
   const query = "SELECT COUNT(*) FROM trips";
   try {
@@ -42,10 +44,12 @@ const isTripsTableEmpty = async () => {
   }
 };
 
+//adding data to the trips table NOTICE: trips table is also being created here
 const seedTripsTable = async () => {
   await createTripsTable();
   const isEmpty = await isTripsTableEmpty();
 
+  //only add this new/starter data to the table if it has no data in it
   if (isEmpty) {
     tripsData.forEach((trip) => {
       const insertQuery = {
@@ -75,6 +79,7 @@ const seedTripsTable = async () => {
   }
 };
 
+//create the Destinations table
 const createDestinationsTable = async () => {
   const createDestinationsTableQuery = `
         CREATE TABLE IF NOT EXISTS destinations (
@@ -95,6 +100,7 @@ const createDestinationsTable = async () => {
   }
 };
 
+//create the Activities table
 const createActivitiesTable = async () => {
   const createActivitiesTableQuery = `
         CREATE TABLE IF NOT EXISTS activities (
@@ -113,6 +119,7 @@ const createActivitiesTable = async () => {
   }
 };
 
+//create the Trips Destinations table
 const createTripsDestinationsTable = async () => {
   const createTripsDestinationsTableQuery = `
         CREATE TABLE IF NOT EXISTS trips_destinations (
@@ -131,6 +138,7 @@ const createTripsDestinationsTable = async () => {
   }
 };
 
+//create the Users table
 const createUsersTable = async () => {
   const createUsersTableQuery = `
         CREATE TABLE IF NOT EXISTS users (
@@ -149,6 +157,7 @@ const createUsersTable = async () => {
   }
 };
 
+//create the Trips Users table
 const createTripsUsersTable = async () => {
   const createTripsUsersTableQuery = `
         CREATE TABLE IF NOT EXISTS trips_users (
@@ -167,6 +176,7 @@ const createTripsUsersTable = async () => {
   }
 };
 
+//setup the database using awaits as we'll go in the correct order here
 const setupDatabase = async () => {
   await seedTripsTable();
   await createDestinationsTable();
