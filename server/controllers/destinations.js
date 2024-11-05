@@ -1,5 +1,5 @@
 // controllers/destinations.js
-import { pool } from "../database.js";
+import { pool } from "../config/database.js";
 
 // Insert a new destination
 const createDestination = async (req, res) => {

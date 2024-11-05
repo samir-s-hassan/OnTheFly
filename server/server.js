@@ -3,7 +3,7 @@ import cors from "cors"; // Importing CORS to allow cross-origin requests
 import tripRoutes from "./routes/trips.js"; // Importing the routes for trip-related endpoints
 import activityRoutes from "./routes/activities.js"; // Importing the routes for activity-related endpoints
 import destinationRoutes from "./routes/destinations.js"; // Importing the routes for destination-related endpoints
-import tripDestinationRoutes from "./routes/trip_destinations.js"; // Importing the routes for trip-destination-related endpoints
+import tripDestinationRoutes from "./routes/trips_destinations.js"; // Importing the routes for trip-destination-related endpoints
 
 const app = express(); // Initializing the Express app
 

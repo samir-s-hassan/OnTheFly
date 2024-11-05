@@ -1,5 +1,5 @@
 // controllers/trip_destinations.js
-import { pool } from "../database.js";
+import { pool } from "../config/database.js";
 
 // Insert a new trip destination
 const createTripDestination = async (req, res) => {

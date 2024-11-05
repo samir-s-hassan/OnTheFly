@@ -1,5 +1,5 @@
 import express from "express"; // Importing the Express framework
-import TripDestinationsController from "../controllers/trip_destinations.js"; // Importing the TripDestinationsController with all trip-destination-related logic
+import TripDestinationsController from "../controllers/trips_destinations.js"; // Importing the TripDestinationsController with all trip-destination-related logic
 
 const router = express.Router(); // Creating a router instance for defining routes
 

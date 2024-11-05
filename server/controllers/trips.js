@@ -1,4 +1,4 @@
-import { pool } from "./database.js";
+import { pool } from "../config/database.js";
 
 // Controller function to create a new trip
 const createTrip = async (req, res) => {
