@@ -11,20 +11,20 @@ app.use(express.json()); // Middleware to parse JSON request bodies
 app.use(cors()); // Middleware to enable CORS, allowing requests from other origins
 
 // Route for handling trip-related requests, mounted at /api/trips
-app.use("/api/trips", tripRoutes);
+app.use("/trips", tripRoutes);
 
 // Route for handling activity-related requests, mounted at /api/activities
-app.use("/api/activities", activityRoutes);
+app.use("/activities", activityRoutes);
 
 // Route for handling destination-related requests, mounted at /api/destinations
-app.use("/api/destinations", destinationRoutes);
+app.use("/destinations", destinationRoutes);
 
 // Route for handling trip-destination relationships, mounted at /api/trip-destinations
-app.use("/api/trip-destinations", tripDestinationRoutes);
+app.use("/trip-destinations", tripDestinationRoutes);
 
 const PORT = process.env.PORT || 3001; // Setting the port for the server (defaults to 3001 if PORT is not set in environment variables)
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}/api`);
 });
