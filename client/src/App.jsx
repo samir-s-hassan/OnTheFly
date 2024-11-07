@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchTrips = async () => {
-      const response = await fetch("/trips");
+      const response = await fetch("api/trips");
       const data = await response.json();
       setTrips(data);
     };
