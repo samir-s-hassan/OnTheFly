@@ -26,5 +26,5 @@ const PORT = process.env.PORT || 3001; // Setting the port for the server (defau
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}/api`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
