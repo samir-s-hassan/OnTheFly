@@ -20,7 +20,7 @@ app.use("/activities", activityRoutes);
 app.use("/destinations", destinationRoutes);
 
 // Route for handling trip-destination relationships, mounted at /api/trip-destinations
-app.use("/trip-destinations", tripDestinationRoutes);
+app.use("/trips-destinations", tripDestinationRoutes);
 
 const PORT = process.env.PORT || 3001; // Setting the port for the server (defaults to 3001 if PORT is not set in environment variables)
 

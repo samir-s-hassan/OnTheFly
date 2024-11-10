@@ -1,0 +1,25 @@
+/* Center the spinner on the screen */
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f5f5f5; /* Light grey background for a softer look */
+  }
+  
+  /* Spinner animation */
+  .spinner {
+    border: 6px solid #e0e0e0; /* Light grey border */
+    border-top: 6px solid #007bff; /* Blue color for the spinning part */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  /* Keyframes for spinner animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
