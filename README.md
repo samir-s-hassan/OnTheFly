@@ -1,7 +1,5 @@
 # OnTheFly
 
-Submitted by: Samir Hassan
-
 ✈️ On the Fly is a user-friendly web application designed to simplify group travel planning, whether you're organizing a bachelor party, a graduation tour, or a cross-country road trip. The app allows users to create new trips, add destinations with detailed plans, and securely save their itineraries through GitHub OAuth. With features like personalized profiles, collaborative tools to include friends in trip planning, and permissions ensuring only participants can access trip details, On the Fly makes planning seamless. Built with a fullstack architecture and hosted on Railway, it offers real-time updates and a responsive interface to help users manage their schedules and budgets effortlessly.
 
 ## Required Features
